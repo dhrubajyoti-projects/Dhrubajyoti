@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dhrubajyoti Roy | Quantum Explorer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+         html {
+            scroll-behavior: smooth;
+        }
+
+        :root {
+            --quantum-blue: #0ea5e9;
+            --quantum-purple: #8b5cf6;
+            --dark-bg: #0f172a;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--dark-bg);
+            color: white;
+            overflow-x: hidden;
+        }
+        
+        .quantum-gradient {
+            background: linear-gradient(135deg, var(--quantum-blue), var(--quantum-purple));
+        }
+        
+        .quantum-text-gradient {
+            background: linear-gradient(135deg, var(--quantum-blue), var(--quantum-purple));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .particle {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(14, 165, 233, 0.5);
+            pointer-events: none;
+        }
+        
+        .card-hover {
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(14, 165, 233, 0.3);
+            border-color: var(--quantum-blue);
+        }
+        
+        .nav-link {
+            position: relative;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -2px;
+            left: 0;
+            background: linear-gradient(90deg, var(--quantum-blue), var(--quantum-purple));
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        .typewriter {
+            overflow: hidden;
+            border-right: 2px solid var(--quantum-blue);
+            white-space: nowrap;
+            animation: typing 3.5s steps(40, end), blink-caret 0.75s step-end infinite;
+        }
+        
+        @keyframes typing {
+            from { width: 0 }
+            to { width: 100% }
+        }
+        
+        @keyframes blink-caret {
+            from, to { border-color: transparent }
+            50% { border-color: var(--quantum-blue) }
+        }
+        
+        .floating {
+            animation: floating 3s ease-in-out infinite;
+        }
+        
+        @keyframes floating {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            left: -8px;
+            top: 0;
+            background: linear-gradient(135deg, var(--quantum-blue), var(--quantum-purple));
+        }
+    </style>
+</head>
+<body class="min-h-screen">
+    <!-- Particle Background -->
+    <div id="particles-js"></div>
+    
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 bg-opacity-80 backdrop-blur-md bg-gray-900">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0">
+                        <span class="text-xl font-bold quantum-text-gradient">Dhrubajyoti Roy  </span>
+                    </div>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-8">
+                        <a href="#home" class="nav-link text-white px-3 py-2 rounded-md text-sm font-medium">Home</a>
+                        <a href="#about" class="nav-link text-white px-3 py-2 rounded-md text-sm font-medium">About</a>
+                        <a href="#interests" class="nav-link text-white px-3 py-2 rounded-md text-sm font-medium">Interests</a>
+                        <a href="#vision" class="nav-link text-white px-3 py-2 rounded-md text-sm font-medium">Vision</a>
+                        <a href="#contact" class="nav-link text-white px-3 py-2 rounded-md text-sm font-medium">Contact</a>
+                    </div>
+                </div>
+                <div class="md:hidden">
+                    <button id="menu-toggle" class="text-white focus:outline-none">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile menu -->
+        <div id="mobile-menu" 
+            class="absolute right-0 top-16 w-full bg-gray-900 bg-opacity-90 transform 
+                    transition-all duration-300 ease-out origin-top 
+                    scale-y-0 opacity-0 md:hidden">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="#home" class="block px-3 py-2 rounded-md text-base font-medium text-white">Home</a>
+                <a href="#about" class="block px-3 py-2 rounded-md text-base font-medium text-white">About</a>
+                <a href="#interests" class="block px-3 py-2 rounded-md text-base font-medium text-white">Interests</a>
+                <a href="#vision" class="block px-3 py-2 rounded-md text-base font-medium text-white">Vision</a>
+                <a href="#contact" class="block px-3 py-2 rounded-md text-base font-medium text-white">Contact</a>
+            </div>
+        </div>
+</div>
+
+    </nav>
+    
+    <!-- Hero Section -->
+    <section id="home" class="min-h-screen flex items-center justify-center relative overflow-hidden pt-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                <div class="text-center md:text-left">
+                    <h1 class="text-4xl md:text-6xl font-bold mb-4">
+                        <span class="quantum-text-gradient">Dhrubajyoti Roy</span>
+                    </h1>
+                    <h2 class="text-xl sm:text-2xl md:text-3xl font-semibold mb-6 typewriter"> Quantum Physics & Computing Enthusiast</h2>
+                    <p class="text-lg text-gray-300 mb-8 max-w-lg">
+                        Exploring the fascinating world of quantum mechanics, computing, and mathematics to push the boundaries of scientific understanding.
+                    </p>
+                    <div class="flex flex-wrap gap-4 justify-center md:justify-start">
+                        <a href="#contact" class="quantum-gradient text-white px-6 py-3 rounded-full font-medium hover:opacity-90 transition duration-300">
+                            Get In Touch
+                        </a>
+                        <a href="#interests" class="border border-gray-600 text-white px-6 py-3 rounded-full font-medium hover:bg-gray-800 transition duration-300">
+                            My Interests
+                        </a>
+                    </div>
+                </div>
+                <div class="relative flex justify-center">
+                    <div class="relative w-64 h-64 md:w-80 md:h-80 rounded-full overflow-hidden border-4 border-gray-700 floating">
+                        <div class="absolute inset-0 bg-gradient-to-br from-blue-500 to-purple-600 opacity-20"></div>
+                        <img src="https://th.bing.com/th/id/R.72dcbdb9f522e180b8d2c00e6e651643?rik=U9SO%2bsSPYBcgQg&riu=http%3a%2f%2fexploringed.com%2fwp-content%2fuploads%2f2018%2f01%2f9-Neemrana-Palace.jpg&ehk=Q3EGlwbbHHe9gqHB0vCAVsENtMn4wRF8ahR%2fzGNe8Qo%3d&risl=&pid=ImgRaw&r=0" alt="Dhrubajyoti Roy" 
+                             class="w-full h-full object-cover">
+                    </div>
+                    <div class="absolute -z-10 w-72 h-72 md:w-96 md:h-96 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 opacity-10 blur-xl"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- About Section -->
+    <section id="about" class="py-20 bg-gray-900 bg-opacity-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">
+                    <span class="quantum-text-gradient">About Me</span>
+                </h2>
+                <div class="w-20 h-1 quantum-gradient mx-auto"></div>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                <div class="order-2 md:order-1">
+                    <h3 class="text-2xl font-semibold mb-6">Who Am I?</h3>
+                    <p class="text-gray-300 mb-4">
+                        I'm Dhrubajyoti Roy, a passionate student with an insatiable curiosity about the fundamental workings of the universe. My journey in science began at an early age, and since then, I've been captivated by the mysteries of quantum physics and the potential of quantum computing.
+                    </p>
+                    <p class="text-gray-300 mb-4">
+                        Currently pursuing my education, I spend my free time diving deep into quantum mechanics, coding quantum algorithms, and exploring mathematical concepts that form the foundation of our physical reality.
+                    </p>
+                    <p class="text-gray-300">
+                        My approach combines rigorous mathematical thinking with creative problem-solving, always seeking to understand the "why" behind every phenomenon.
+                    </p>
+                </div>
+                <div class="order-1 md:order-2 relative">
+                    <div class="bg-gray-800 p-6 rounded-xl card-hover">
+                        <h4 class="text-xl font-semibold mb-4 quantum-text-gradient">Quick Facts</h4>
+                        <ul class="space-y-4">
+                            <li class="flex items-start">
+                                <div class="flex-shrink-0 h-6 w-6 quantum-gradient rounded-full flex items-center justify-center mr-3 mt-1">
+                                    <i class="fas fa-atom text-xs text-white"></i>
+                                </div>
+                                <span class="text-gray-300">Passionate about quantum physics and computing</span>
+                            </li>
+                            <li class="flex items-start">
+                                <div class="flex-shrink-0 h-6 w-6 quantum-gradient rounded-full flex items-center justify-center mr-3 mt-1">
+                                    <i class="fas fa-code text-xs text-white"></i>
+                                </div>
+                                <span class="text-gray-300">Enjoys coding and algorithm development</span>
+                            </li>
+                            <li class="flex items-start">
+                                <div class="flex-shrink-0 h-6 w-6 quantum-gradient rounded-full flex items-center justify-center mr-3 mt-1">
+                                    <i class="fas fa-square-root-alt text-xs text-white"></i>
+                                </div>
+                                <span class="text-gray-300">Fascinated by advanced mathematics</span>
+                            </li>
+                            <li class="flex items-start">
+                                <div class="flex-shrink-0 h-6 w-6 quantum-gradient rounded-full flex items-center justify-center mr-3 mt-1">
+                                    <i class="fas fa-flask text-xs text-white"></i>
+                                </div>
+                                <span class="text-gray-300">Dedicated to scientific exploration</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="absolute -z-10 -inset-2 bg-gradient-to-r from-blue-500 to-purple-600 rounded-xl opacity-20 blur-lg"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Interests Section -->
+    <section id="interests" class="py-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">
+                    <span class="quantum-text-gradient">My Interests</span>
+                </h2>
+                <div class="w-20 h-1 quantum-gradient mx-auto"></div>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Quantum Physics -->
+                <div class="bg-gray-800 bg-opacity-50 rounded-xl p-6 card-hover">
+                    <div class="quantum-gradient w-12 h-12 rounded-full flex items-center justify-center mb-4">
+                        <i class="fas fa-atom text-white text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">Quantum Physics</h3>
+                    <p class="text-gray-300">
+                        The bizarre and counterintuitive world of quantum mechanics fascinates me. From superposition to entanglement, I'm captivated by how particles behave at the smallest scales.
+                    </p>
+                </div>
+                
+                <!-- Quantum Computing -->
+                <div class="bg-gray-800 bg-opacity-50 rounded-xl p-6 card-hover">
+                    <div class="quantum-gradient w-12 h-12 rounded-full flex items-center justify-center mb-4">
+                        <i class="fas fa-question-circle text-white text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">Quantum Computing</h3>
+                    <p class="text-gray-300">
+                        Exploring how quantum principles can revolutionize computation. I'm particularly interested in quantum algorithms and their potential to solve complex problems.
+                    </p>
+                </div>
+                
+                <!-- Coding -->
+                <div class="bg-gray-800 bg-opacity-50 rounded-xl p-6 card-hover">
+                    <div class="quantum-gradient w-12 h-12 rounded-full flex items-center justify-center mb-4">
+                        <i class="fas fa-code text-white text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">Coding</h3>
+                    <p class="text-gray-300">
+                        Programming is my tool for exploring ideas. I enjoy implementing algorithms, simulating quantum systems, and building projects that bridge theory and application.
+                    </p>
+                </div>
+                
+                <!-- Mathematics -->
+                <div class="bg-gray-800 bg-opacity-50 rounded-xl p-6 card-hover">
+                    <div class="quantum-gradient w-12 h-12 rounded-full flex items-center justify-center mb-4">
+                        <i class="fas fa-square-root-alt text-white text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">Mathematics</h3>
+                    <p class="text-gray-300">
+                        The language of the universe. I'm drawn to abstract algebra, complex analysis, and the mathematical foundations of quantum theory.
+                    </p>
+                </div>
+                
+                <!-- Science -->
+                <div class="bg-gray-800 bg-opacity-50 rounded-xl p-6 card-hover">
+                    <div class="quantum-gradient w-12 h-12 rounded-full flex items-center justify-center mb-4">
+                        <i class="fas fa-flask text-white text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">Science</h3>
+                    <p class="text-gray-300">
+                        Beyond quantum physics, I'm interested in cosmology, particle physics, and the scientific method as a way to understand our reality.
+                    </p>
+                </div>
+                
+                <!-- Future Technologies -->
+                <div class="bg-gray-800 bg-opacity-50 rounded-xl p-6 card-hover">
+                    <div class="quantum-gradient w-12 h-12 rounded-full flex items-center justify-center mb-4">
+                        <i class="fas fa-rocket text-white text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">Future Technologies</h3>
+                    <p class="text-gray-300">
+                        How quantum technologies will shape our future - from quantum cryptography to quantum sensors and beyond.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Vision Section -->
+    <section id="vision" class="py-20 bg-gray-900 bg-opacity-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">
+                    <span class="quantum-text-gradient">My Vision</span>
+                </h2>
+                <div class="w-20 h-1 quantum-gradient mx-auto"></div>
+            </div>
+            
+            <div class="max-w-3xl mx-auto">
+                <div class="relative">
+                    <!-- Timeline -->
+                    <div class="border-l-2 border-gray-700 pl-8 space-y-12">
+                        <!-- Current -->
+                        <div class="relative timeline-item">
+                            <div class="bg-gray-800 bg-opacity-50 rounded-xl p-6 card-hover">
+                                <div class="flex items-center mb-2">
+                                    <div class="quantum-gradient w-8 h-8 rounded-full flex items-center justify-center mr-3">
+                                        <i class="fas fa-user-graduate text-white text-sm"></i>
+                                    </div>
+                                    <h3 class="text-xl font-semibold">Current Journey</h3>
+                                </div>
+                                <p class="text-gray-300">
+                                    As a dedicated student, I'm building a strong foundation in physics, mathematics, and computer science. My focus is on understanding quantum mechanics deeply while developing programming skills to implement quantum algorithms.
+                                </p>
+                            </div>
+                        </div>
+                        
+                        <!-- Near Future -->
+                        <div class="relative timeline-item">
+                            <div class="bg-gray-800 bg-opacity-50 rounded-xl p-6 card-hover">
+                                <div class="flex items-center mb-2">
+                                    <div class="quantum-gradient w-8 h-8 rounded-full flex items-center justify-center mr-3">
+                                        <i class="fas fa-microscope text-white text-sm"></i>
+                                    </div>
+                                    <h3 class="text-xl font-semibold">Near Future Goals</h3>
+                                </div>
+                                <p class="text-gray-300">
+                                    I aim to pursue higher education in quantum physics or quantum computing, contributing to research that pushes the boundaries of our understanding. My goal is to work on developing practical quantum algorithms and exploring quantum information theory.
+                                </p>
+                            </div>
+                        </div>
+                        
+                        <!-- Long Term -->
+                        <div class="relative timeline-item">
+                            <div class="bg-gray-800 bg-opacity-50 rounded-xl p-6 card-hover">
+                                <div class="flex items-center mb-2">
+                                    <div class="quantum-gradient w-8 h-8 rounded-full flex items-center justify-center mr-3">
+                                        <i class="fas fa-star text-white text-sm"></i>
+                                    </div>
+                                    <h3 class="text-xl font-semibold">Long Term Vision</h3>
+                                </div>
+                                <p class="text-gray-300">
+                                    My ultimate aspiration is to become a scientist who contributes meaningfully to quantum technologies. I dream of being part of breakthroughs that harness quantum phenomena to solve real-world problems, from medicine to cryptography to materials science.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="mt-16 text-center">
+                    <h3 class="text-2xl font-semibold mb-6">Why Quantum?</h3>
+                    <p class="text-gray-300 max-w-2xl mx-auto">
+                        Quantum physics represents the frontier of human knowledge. It challenges our classical intuitions and offers revolutionary possibilities. I believe mastering quantum concepts will be key to technological advancements in the coming decades, and I want to be at the forefront of this exciting field.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quiet Inspiration Section -->
+    <section class="py-16">
+        <h2 class="text-3xl md:text-4xl font-bold mb-4 text-center">
+            <span class="quantum-text-gradient">A quiet inspiration in my journey</span>
+        </h2>
+        <div class="w-20 h-1 quantum-gradient mx-auto mb-8"></div>
+
+        <p class="text-gray-300 mt-4 max-w-2xl mx-auto text-center">
+            In the quantum world, some states become quietly entangled —<br>
+            connected in ways that distance, time, or silence can never undo. <br><br>
+
+            Life also brings a few rare people like that…<br>
+            gentle, steady, and unexpectedly important —<br>
+            people who never try to change me,<br>
+            yet end up becoming a constant<br>
+            in my universe of shifting equations.     
+        </p>
+
+        <!-- Signature -->
+        <p class="text-gray-500 text-sm mt-3 text-center">
+            The unknown variable that kept collapsing my mind into the same state, every time. <br>
+            (D.S.)
+        </p>
+    </section>
+
+    
+    <!-- Contact Section -->
+    <section id="contact" class="py-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">
+                    <span class="quantum-text-gradient">Get In Touch</span>
+                </h2>
+                <div class="w-20 h-1 quantum-gradient mx-auto"></div>
+                <p class="text-gray-300 mt-4 max-w-2xl mx-auto">
+                    Interested in quantum physics, computing, or just want to chat about science? Feel free to reach out!
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+                <div>
+                    <div class="bg-gray-800 bg-opacity-50 rounded-xl p-8 card-hover h-full">
+                        <h3 class="text-2xl font-semibold mb-6">Contact Information</h3>
+                        
+                        <div class="space-y-6">
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0 quantum-gradient rounded-full w-10 h-10 flex items-center justify-center mr-4">
+                                    <i class="fas fa-envelope text-white"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-medium text-gray-300">Email</h4>
+                                    <a href="mailto:roydhrubajyoti29@gmail.com" class="text-blue-400 hover:underline">roydhrubajyoti29@gmail.com</a>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0 quantum-gradient rounded-full w-10 h-10 flex items-center justify-center mr-4">
+                                    <i class="fab fa-instagram text-white"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-medium text-gray-300">Instagram</h4>
+                                    <a href="https://www.instagram.com/the.best_dhrubajyoti/" target="_blank" class="text-blue-400 hover:underline">@the.best_dhrubajyoti</a>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0 quantum-gradient rounded-full w-10 h-10 flex items-center justify-center mr-4">
+                                    <i class="fas fa-map-marker-alt text-white"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-medium text-gray-300">Location</h4>
+                                    <p class="text-gray-300">India</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-10">
+                            <h4 class="font-medium text-gray-300 mb-4">Connect with me</h4>
+                            <div class="flex space-x-4">
+                                <a href="https://www.instagram.com/the.best_dhrubajyoti/" target="_blank" class="w-10 h-10 rounded-full bg-gray-700 flex items-center justify-center hover:bg-blue-500 transition duration-300">
+                                    <i class="fab fa-instagram text-white"></i>
+                                </a>
+                                <a href="mailto:roydhrubajyoti29@gmail.com" class="w-10 h-10 rounded-full bg-gray-700 flex items-center justify-center hover:bg-red-500 transition duration-300">
+                                    <i class="fas fa-envelope text-white"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <form action="https://formsubmit.co/roydhrubajyoti29@gmail.com" method="POST" class="space-y-6">
+    
+                    <input type="hidden" name="_subject" value="New message from portfolio site!">
+                    <input type="hidden" name="_captcha" value="false">
+
+                    <div>
+                        <label class="block text-gray-300 mb-2">Your Name</label>
+                        <input type="text" name="name" class="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg text-white" required>
+                    </div>
+
+                    <div>
+                        <label class="block text-gray-300 mb-2">Your Email</label>
+                        <input type="email" name="email" class="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg text-white" required>
+                    </div>
+
+                    <div>
+                        <label class="block text-gray-300 mb-2">Subject</label>
+                        <input type="text" name="subject" class="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg text-white" required>
+                    </div>
+
+                    <div>
+                        <label class="block text-gray-300 mb-2">Your Message</label>
+                        <textarea name="message" rows="5" class="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg text-white" required></textarea>
+                    </div>
+
+                    <button type="submit" class="mt-4 quantum-gradient text-white px-6 py-3 rounded-full font-medium hover:opacity-90 transition duration-300">
+                        Send Message
+                    </button>
+                </form>
+
+            </div>
+        </div>
+    </section>
+    <script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const toggle = document.getElementById("menu-toggle");
+        const menu = document.getElementById("mobile-menu");
+        let open = false;
+
+        toggle.addEventListener("click", () => {
+            open = !open;
+
+            if (open) {
+                menu.classList.remove("scale-y-0", "opacity-0");
+                menu.classList.add("scale-y-100", "opacity-100");
+            } else {
+                menu.classList.add("scale-y-0", "opacity-0");
+                menu.classList.remove("scale-y-100", "opacity-100");
+            }
+        });
+    });
+    </script>
+
+</body>                    
+</html>
